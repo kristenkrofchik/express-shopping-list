@@ -6,6 +6,7 @@ class Item {
     this.price = price;
 
     items.push(this);
+    }
 }
 
 module.exports = Item;

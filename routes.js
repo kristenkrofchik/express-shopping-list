@@ -1,7 +1,6 @@
 const express = require('express');
-const ITEMS = require('./items');
+const ITEMS = require('./fakeDb');
 const Item = require('./item');
-const Item = require('../express-shopping-list-solution/item');
 const router = new express.Router();
 
 router.get('/items', (req, res) => {
@@ -28,6 +27,18 @@ router.post('/items', (req, res) => {
     } catch (err) {
         return next(err);
     }
-})
+});
+
+router.patch('/items/:name', (req, res) => {
+    try {
+        const findItem = ITEMS.find(i => i.name === +req.params.name);
+        findItem.name = req.body.name;
+        findItem.price = req.body.price;
+        return res.json({ updated: findItem })
+    } catch (err) {
+        return next(err);
+    }
+});
+
 
 module.exports = router;
