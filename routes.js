@@ -40,5 +40,14 @@ router.patch('/items/:name', (req, res) => {
     }
 });
 
+router.delete('/:name', (req, res, next) => {
+    try {
+      Item.remove(req.params.name);
+      return res.json({message:'Deleted'});
+    } catch (err) {
+      return next(err)
+    }
+  });
+
 
 module.exports = router;
